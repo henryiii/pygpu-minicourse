@@ -1,0 +1,25 @@
+name: gpu-minicourse
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.6
+  - numpy>=1.17
+  - matplotlib>=3.0
+  - jupyterlab>=1.2
+  - plumbum>=1.6.6
+  - numba>=0.46
+  - nb_conda_kernels
+  - line_profiler
+  - ipywidgets
+  - nodejs
+  - ipympl
+  - python-graphviz
+  - cupy
+  - pytorch
+  - tensorflow-gpu
+  - pip
+  - pip:
+    - git+https://github.com/NERSC/slurm-magic.git
+    

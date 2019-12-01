@@ -1,0 +1,26 @@
+I downloaded Miniconda from the miniconda website and ran it:
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+./Miniconda3-latest-Linux-x86_64.sh
+
+I gave the /opt/export/course/pygpu/miniconda path, and answered no when
+it wanted me to set up the conda command. This was the outbput message:
+
+    You have chosen to not have conda modify your shell scripts at all.
+    To activate conda's base environment in your current shell session:
+    
+    eval "$(/opt/export/course/pygpu/miniconda/bin/conda shell.YOUR_SHELL_NAME hook)"
+    
+    To install conda's shell functions for easier access, first activate, then:
+    
+    conda init
+    
+    If you'd prefer that conda's base environment not be activated on startup,
+       set the auto_activate_base parameter to false:
+    
+    conda config --set auto_activate_base false
+    
+    Thank you for installing Miniconda3!
+
+
