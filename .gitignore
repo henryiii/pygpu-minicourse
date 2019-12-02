@@ -1,4 +1,7 @@
 *nbconvert*
 tmp.sbatch
+/*.sbatch
 *.out
 __pycache__
+*.html
+.ipynb_checkpoints
