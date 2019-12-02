@@ -1,0 +1,56 @@
+#%Module
+
+proc ModulesHelp { } {
+   puts stderr "This module adds pygpu 2019.12 miniconda to your path"
+}   
+    
+module-whatis   "Sets up pygpy 2019.12 miniconda in your environment"
+
+prepend-path PATH "/opt/export/course/pygpu/miniconda/bin"
+setenv CONDA_DEFAULT_ENV base
+setenv CONDA_EXE "/opt/export/course/pygpu/miniconda/bin/conda"
+setenv CONDA_PREFIX "/opt/export/course/pygpu/miniconda"
+setenv CONDA_PROMPT_MODIFIER ''
+setenv CONDA_SHLVL 1
+setenv _CE_CONDA ""
+setenv _CE_M ""
+
+set-alias conda {
+if [ "$#" -lt 1 ]; then
+	"$CONDA_EXE" $_CE_M $_CE_CONDA;
+else
+	\\local cmd="$1";
+	shift;
+	case "$cmd" in
+	activate | deactivate)
+                __conda_activate "$cmd" "$@"
+		;;
+	install | update | upgrade | remove | uninstall)
+                "$CONDA_EXE" $_CE_M $_CE_CONDA "$cmd" "$@" && __conda_reactivate
+                ;;
+	*)
+		"$CONDA_EXE" $_CE_M $_CE_CONDA "$cmd" "$@"
+		;;
+	esac;
+fi
+}
+
+set-alias __conda_activate {
+	if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+		PS1="$CONDA_PS1_BACKUP";
+		\\unset CONDA_PS1_BACKUP;
+	fi;
+	\\local cmd="$1";
+	shift;
+	\\local ask_conda;
+	ask_conda="$(PS1="$PS1" "$CONDA_EXE" $_CE_M $_CE_CONDA shell.posix "$cmd" "$@")" || \\return $?;
+	\\eval "$ask_conda";
+	\\hash -r
+}
+
+set-alias __conda_reactivate {
+	\\local ask_conda;
+	ask_conda="$(PS1="$PS1" "$CONDA_EXE" $_CE_M $_CE_CONDA shell.posix reactivate)" || \\return $?;
+	\\eval "$ask_conda";
+	\\hash -r
+}

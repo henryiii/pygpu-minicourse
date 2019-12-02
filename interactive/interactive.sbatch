@@ -11,14 +11,12 @@
 #SBATCH --time=01:00:00          # total run time limit (HH:MM:SS)
 
 module purge
+module load course/pygpu
 
 echo "Job $SLURM_JOB_ID execution at: `date`"
 
 NODE_HOSTNAME=`hostname -s`
 LOCAL_PORT="8123"
-
-eval "$(/opt/export/course/pygpu/miniconda/bin/conda shell.bash hook)"
-conda activate gpu-minicourse
 
 echo ""
 echo "Your jupyter lab server is about to start!"

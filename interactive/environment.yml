@@ -19,7 +19,3 @@ dependencies:
   - cupy
   - pytorch
   - tensorflow-gpu
-  - pip
-  - pip:
-    - git+https://github.com/NERSC/slurm-magic.git
-    
