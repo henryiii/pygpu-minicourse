@@ -24,3 +24,4 @@ it wanted me to set up the conda command. This was the outbput message:
     Thank you for installing Miniconda3!
 
 
+I also installed jupyter labextension install @ijmbarr/jupyterlab_spellchecker.

@@ -61,19 +61,28 @@ async def submit_and_watch(name):
     
     writer = IWriter(f"Submitting {name}.sbatch\n")
 
+    sbatch = Path(f"{name}.sbatch")
+    out = Path(f"{name}.out")
+    
+    if out.exists():
+        out.unlink()
+    
     jobnum = await submit_file(name, writer)
-    await watch_file(f"{name}.out", writer)
+    
+    await watch_file(out, writer)
+    
+    if out.exists():
+        out.unlink()
+    
+    if sbatch.exists():
+        sbatch.unlink()
+    
 
 def sbatch(line, cell):
     "Submit a job by name"
     name, = line.split() # Name required
     assert '.' not in name, "Do not include extension!"
 
-    out = Path(f"{name}.out")
-    
-    if out.exists():
-        out.unlink()
-    
     txt = cell.format(name=name, **globals()) + 'echo\n echo "[SBATCH-DONE]"\n'
     
     with open(f"{name}.sbatch", 'w') as f:

@@ -47,3 +47,7 @@ If you have a GPU, you can install the environment provided in `interactive/envi
 ## Running GPU kernels
 
 Load the `ExampleRunner.ipynb` notebook. You can enter the name of a GPU notebook (without the extension) at the top of the provided cell, and run that to submit the notebook as a job.
+
+## Survey
+
+Link: <https://forms.gle/nPdBcaYanDYkJZW9A>
