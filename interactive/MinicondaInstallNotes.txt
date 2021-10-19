@@ -25,3 +25,25 @@ it wanted me to set up the conda command. This was the outbput message:
 
 
 I also installed jupyter labextension install @ijmbarr/jupyterlab_spellchecker.
+
+
+---
+
+Part 2: reinstall
+
+This time, we'll use mambaforge (miniforge) to speed things up:
+
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh
+
+Same answers as above. This gave Python 3.9.
+
+Since activating the environment doesn't really give a working "conda" command anymore, I used:
+
+
+
+Though, mamba actually works, so not really needed. Then I added the environment module. I had
+to update the environment "base" since that's what we tie to. :/
+
+
+
+
