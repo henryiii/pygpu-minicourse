@@ -50,7 +50,7 @@ Click it to enter JupyterLab!
 ### Local setup
 
 If you have a GPU, you can install the environment provided in
-`interactive/environment.yml` with Conda. You'll probably have to choose a
+`environment.yml` with Conda. You'll probably have to choose a
 kernel when you launch it (and you may need the `conda_nb_kernel` package).
 
 ## Running GPU kernels

@@ -1,0 +1,27 @@
+name: gpu-minicourse
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - cudatoolkit
+  - cudnn
+  - cupy>=9.0
+  - cutensor
+  - iminuit
+  - ipympl
+  - ipywidgets
+  - jupyterlab>=3
+  - line_profiler
+  - matplotlib>=3.4
+  - nb_conda_kernels
+  - nccl
+  - nodejs
+  - numba>=0.55
+  - numpy>=1.20
+  - plumbum>=1.7.0
+  - python-graphviz
+  - python>=3.9
+  - pytorch
+  - scipy
+  - tensorflow-gpu

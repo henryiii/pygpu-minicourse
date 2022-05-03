@@ -13,10 +13,8 @@ chmod +x Mambaforge-Linux-x86_64.sh
 eval "$(/opt/export/course/pygpu/miniconda/bin/conda shell.bash hook)"
 
 mamba env update -f environment.yml -n base
-mamba env update -f cupy-environment.yml -n base
 
 jupyter labextension install @ijmbarr/jupyterlab_spellchecker
-
 
 # Then I added the environment module. I had
 # to update the environment "base" since that's what we tie to. :/
