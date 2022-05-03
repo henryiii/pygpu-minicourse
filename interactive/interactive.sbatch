@@ -29,7 +29,6 @@ echo ""
 
 # Execution holds here until user clicks quit or time runs out
 
-jupyter lab --no-browser --port=$LOCAL_PORT 
+jupyter lab --no-browser --port=$LOCAL_PORT
 
 echo "job $SLURM_JOB_ID execution finished at: `date`"
-

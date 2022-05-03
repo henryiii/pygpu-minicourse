@@ -20,4 +20,3 @@ jupyter labextension install @ijmbarr/jupyterlab_spellchecker
 
 # Then I added the environment module. I had
 # to update the environment "base" since that's what we tie to. :/
-

@@ -38,7 +38,7 @@ like this:
 
 Make sure you have **checked the JupyterLab** checkbox, that you have enough
 time (at least 2 hours), and that you have entered our reservation (`pygpu`).
-Leave the extra slurm options blank. 
+Leave the extra slurm options blank.
 
 After you click launch, you should soon see a button that looks like this:
 

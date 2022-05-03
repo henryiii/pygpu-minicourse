@@ -2,8 +2,8 @@
 
 proc ModulesHelp { } {
    puts stderr "This module adds pygpu 2019.12 miniconda to your path"
-}   
-    
+}
+
 module-whatis   "Sets up pygpy 2019.12 miniconda in your environment"
 
 prepend-path PATH "/opt/export/course/pygpu/miniconda/bin"
