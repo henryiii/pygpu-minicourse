@@ -5,16 +5,16 @@ dependencies:
   - python>=3.9
   - numpy>=1.20
   - matplotlib>=3.4
-  - jupyterlab>=1.2
+  - jupyterlab>=3
   - plumbum>=1.7.0
-  - numba>=0.50
+  - numba>=0.55
   - nb_conda_kernels
   - line_profiler
   - ipywidgets
   - nodejs
   - ipympl
   - python-graphviz
-  - cupy >= 9.0
+  - cupy>=9.0
   - cudnn
   - cutensor
   - nccl

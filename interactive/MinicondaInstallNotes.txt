@@ -1,49 +1,23 @@
-I downloaded Miniconda from the miniconda website and ran it:
+# I downloaded Miniconda from the miniconda website (now Mambaforge) and ran it:
 
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-chmod +x Miniconda3-latest-Linux-x86_64.sh
-./Miniconda3-latest-Linux-x86_64.sh
-
-I gave the /opt/export/course/pygpu/miniconda path, and answered no when
-it wanted me to set up the conda command. This was the outbput message:
-
-    You have chosen to not have conda modify your shell scripts at all.
-    To activate conda's base environment in your current shell session:
-    
-    eval "$(/opt/export/course/pygpu/miniconda/bin/conda shell.YOUR_SHELL_NAME hook)"
-    
-    To install conda's shell functions for easier access, first activate, then:
-    
-    conda init
-    
-    If you'd prefer that conda's base environment not be activated on startup,
-       set the auto_activate_base parameter to false:
-    
-    conda config --set auto_activate_base false
-    
-    Thank you for installing Miniconda3!
-
-
-I also installed jupyter labextension install @ijmbarr/jupyterlab_spellchecker.
-
-
----
-
-Part 2: reinstall
-
-This time, we'll use mambaforge (miniforge) to speed things up:
-
+# wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh
 
-Same answers as above. This gave Python 3.9.
-
-Since activating the environment doesn't really give a working "conda" command anymore, I used:
-
+chmod +x Mambaforge-Linux-x86_64.sh
+./Mambaforge-Linux-x86_64.sh
 
 
-Though, mamba actually works, so not really needed. Then I added the environment module. I had
-to update the environment "base" since that's what we tie to. :/
+# I gave the /opt/export/course/pygpu/miniconda path, and answered no when
+# it wanted me to set up the conda command.
+
+eval "$(/opt/export/course/pygpu/miniconda/bin/conda shell.bash hook)"
+
+mamba env update -f environment.yml -n base
+mamba env update -f cupy-environment.yml -n base
+
+jupyter labextension install @ijmbarr/jupyterlab_spellchecker
 
 
-
+# Then I added the environment module. I had
+# to update the environment "base" since that's what we tie to. :/
 
