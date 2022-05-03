@@ -33,7 +33,7 @@ repos:
     rev: "v2.6.2"
     hooks:
       - id: prettier
-        types_or: [yaml]
+        types_or: [yaml, markdown]
 
   - repo: local
     hooks:

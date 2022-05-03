@@ -1,4 +1,5 @@
 # PyGPU: High performance Python for GPUs
+
 ## Henry Schreiner
 
 This minicourse covers ways to speed up your code using GPUs.
