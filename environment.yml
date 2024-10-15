@@ -2,7 +2,6 @@ name: gpu-minicourse
 channels:
   - pytorch
   - conda-forge
-  - defaults
 dependencies:
   - cudatoolkit
   - cudnn
@@ -24,4 +23,5 @@ dependencies:
   - python>=3.9
   - pytorch
   - scipy
-  - tensorflow-gpu
+  # Disabled
+  #- tensorflow-gpu

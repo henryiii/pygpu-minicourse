@@ -39,7 +39,10 @@ like this:
 
 Make sure you have **checked the JupyterLab** checkbox, that you have enough
 time (at least 2 hours), and that you have entered our reservation (`pygpu`).
-Leave the extra slurm options blank.
+Leave the extra slurm options blank. (without a reservation,
+`--gres=gpu --constraint=a100` would pick GPUs and set the type of GPU.)
+
+The Anaconda3 version is `custom`. The module name is `course/pygpu/default`.
 
 After you click launch, you should soon see a button that looks like this:
 
