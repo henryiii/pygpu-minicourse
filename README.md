@@ -39,11 +39,12 @@ like this:
 
 Make sure you have **checked the JupyterLab** checkbox, that you have enough
 time (at least 2 hours), and that you have entered our reservation (`fallgpu`).
-Leave the extra slurm options blank. (without a reservation,
-`--gres=gpu --constraint=a100` would pick GPUs and set the type of GPU.)
+The slurm options must include `--gres=gpu` (You can include
+`--constraint=a100` to set the type of GPU, but don't do that when we are all
+sharing GPUs.)
 
-The Anaconda3 version doesn't matter (`2025.6` is fine). The module name is
-`course/pygpu/default`.
+The Anaconda3 version should be `custom`. The module name is
+`course/pygpu/default`; the other fields can be left blank.
 
 After you click launch, you should soon see a button that looks like this:
 
