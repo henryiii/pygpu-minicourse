@@ -7,6 +7,7 @@ from pathlib import Path
 
 class IWriter(object):
     "Class that sets up a live output display cell. .add(msg) will append to output."
+
     WATCH_COUNT = 1
 
     def __init__(self, msg):

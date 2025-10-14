@@ -25,4 +25,3 @@
 cd /opt/export/course/pygpu
 curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
 ./bin/micromamba create -f environment.yml -r ./miniconda -n base
-
