@@ -1,0 +1,17 @@
+[lint]
+extend-select = [
+  "B",   # flake8-bugbear
+  "I",   # isort
+  "PGH", # pygrep-hooks
+  "RUF", # Ruff-specific
+  "UP",  # pyupgrade
+]
+ignore = [
+  "E741", # Ambiguous names; the notebooks use maths-style names on purpose
+]
+
+[lint.per-file-ignores]
+# Notebooks import in the cell that first needs the import, and re-import to
+# show what a section depends on. Cell output is the return value of a bare
+# expression, so a "useless" expression is the point.
+"*.ipynb" = ["B018", "E402", "F811", "I001"]

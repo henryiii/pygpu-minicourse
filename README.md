@@ -38,7 +38,8 @@ like this:
 > ![Setup page](./images/SetupPage.png)
 
 Make sure you have **checked the JupyterLab** checkbox, that you have enough
-time (at least 2 hours), and that you have entered our reservation (`fallgpu`).
+time (at least 2 hours), and that you have entered our reservation (`fallgpu`;
+this name changes each term, so use the one given in class).
 The slurm options must include `--gres=gpu` (You can include
 `--constraint=a100` to set the type of GPU, but don't do that when we are all
 sharing GPUs.)
@@ -54,15 +55,38 @@ Click it to enter JupyterLab!
 
 ### Local setup
 
-If you have a GPU, you can install the environment provided in
-`environment.yml` with Conda/Mamba. You'll probably have to choose a
-kernel when you launch it (and you may need the `conda_nb_kernel` package).
+If you have an NVidia GPU on Linux, you can install the environment in
+`environment.yml`:
+
+```bash
+micromamba create -f environment.yml
+micromamba run -n gpu-minicourse jupyter lab
+```
+
+Conda or Mamba work the same way. You will probably have to choose a kernel when
+you launch JupyterLab; the `nb_conda_kernels` package in the environment makes
+the course kernel show up.
+
+## Contents
+
+| Notebook                                                | Topic                                                 |
+| ------------------------------------------------------- | ----------------------------------------------------- |
+| `00_intro`                                              | GPU concepts, and the Python GPU library landscape    |
+| `01a_fractal_cupy` / `01b_fractal_numba`                | Mandelbrot fractal, the same problem in two libraries |
+| `02a_nll_cupy` / `02b_nll_tensorflow` / `02c_nll_torch` | Unbinned negative log likelihood, in three libraries  |
+| `02x_torch_autograd`                                    | A short look at PyTorch gradients                     |
+| `03_nll`                                                | The NLL problem again, CuPy and Numba together        |
+| `04_ode`                                                | An ODE solver that is _slower_ on the GPU             |
+
+Each one starts from a NumPy version on the CPU, so you can see what the GPU
+actually buys you.
 
 ## Running GPU kernels
 
 Load the `ExampleRunner.ipynb` notebook. You can enter the name of a GPU
 notebook (without the extension) at the top of the provided cell, and run that
-to submit the notebook as a job.
+to submit the notebook as a job. It writes an HTML file with the same name,
+which holds the output.
 
 ## Survey
 
