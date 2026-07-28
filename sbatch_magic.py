@@ -1,11 +1,17 @@
-from IPython.core.magic import line_cell_magic
-from IPython import display
 import asyncio
 from io import StringIO
 from pathlib import Path
 
+from IPython import display
 
-class IWriter(object):
+DONE_MARKER = "[SBATCH-DONE]"
+
+# ensure_future only keeps a weak reference, so a running job can be collected
+# mid-flight unless we hold on to it here.
+_TASKS = set()
+
+
+class IWriter:
     "Class that sets up a live output display cell. .add(msg) will append to output."
 
     WATCH_COUNT = 1
@@ -40,7 +46,9 @@ async def submit_file(name, writer):
     stdout = stdout.decode()
 
     writer.add(stdout)
-    assert "Submitted batch job " in stdout, "Invalid job submission output"
+    if "Submitted batch job " not in stdout:
+        writer.add(stderr.decode())
+        raise RuntimeError("Invalid job submission output")
     return stdout.split()[-1]
 
 
@@ -51,10 +59,11 @@ async def watch_file(filename, writer):
     filename = Path(filename)
     while not filename.exists():
         await asyncio.sleep(0.5)
-    with open(filename) as f:
+    # Blocking, but these are single short lines from a local file.
+    with filename.open() as f:  # noqa: ASYNC230
         while True:
             r = f.readline()
-            if "[SBATCH-DONE]" in r:
+            if DONE_MARKER in r:
                 break
             elif r == "":
                 await asyncio.sleep(0.5)
@@ -72,18 +81,13 @@ async def submit_and_watch(name):
     sbatch = Path(f"{name}.sbatch")
     out = Path(f"{name}.out")
 
-    if out.exists():
-        out.unlink()
+    out.unlink(missing_ok=True)
 
-    jobnum = await submit_file(name, writer)
-
+    await submit_file(name, writer)
     await watch_file(out, writer)
 
-    if out.exists():
-        out.unlink()
-
-    if sbatch.exists():
-        sbatch.unlink()
+    out.unlink(missing_ok=True)
+    sbatch.unlink(missing_ok=True)
 
 
 def sbatch(line, cell):
@@ -91,12 +95,13 @@ def sbatch(line, cell):
     (name,) = line.split()  # Name required
     assert "." not in name, "Do not include extension!"
 
-    txt = cell.format(name=name, **globals()) + 'echo\n echo "[SBATCH-DONE]"\n'
+    txt = cell.format(name=name, **globals()) + f'echo\necho "{DONE_MARKER}"\n'
 
-    with open(f"{name}.sbatch", "w") as f:
-        f.write(txt)
+    Path(f"{name}.sbatch").write_text(txt)
 
-    asyncio.ensure_future(submit_and_watch(name))
+    task = asyncio.ensure_future(submit_and_watch(name))
+    _TASKS.add(task)
+    task.add_done_callback(_TASKS.discard)
 
 
 def load_ipython_extension(ipython):

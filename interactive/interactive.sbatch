@@ -6,12 +6,12 @@
 #SBATCH --nodes=1                # node count
 #SBATCH --ntasks=1               # total number of tasks across all nodes
 #SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
-#SBATCH --gres=gpu:tesla_v100:1  # number of gpus per node
+#SBATCH --gres=gpu:1             # number of gpus per node
 #SBATCH --mem=1G                 # total memory (RAM) per node
 #SBATCH --time=01:00:00          # total run time limit (HH:MM:SS)
 
 module purge
-module load course/pygpu
+module load course/pygpu/default
 
 echo "Job $SLURM_JOB_ID execution at: `date`"
 

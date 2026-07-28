@@ -1,27 +1,26 @@
 name: gpu-minicourse
 channels:
-  - pytorch
   - conda-forge
 dependencies:
-  - cudatoolkit
-  - cudnn
-  - cupy>=9.0
-  - cutensor
+  # Python is held at 3.12 and CUDA at 12.9 because TensorFlow is the slowest
+  # of these to support a new version of either. Drop TensorFlow to go higher.
+  - python 3.12.*
+  - cuda-version 12.9.*
+  # GPU libraries. numba-cuda supplies numba.cuda; the CUDA target is no longer
+  # part of numba itself.
+  - cupy >=14
+  - numba >=0.61
+  - numba-cuda >=0.15
+  - pytorch-gpu >=2.9
+  - tensorflow-gpu >=2.19
+  # Scientific stack
   - iminuit
+  - matplotlib-base >=3.9
+  - numpy >=2
+  - scipy
+  # Notebook environment
   - ipympl
   - ipywidgets
-  - jupyterlab>=3
+  - jupyterlab >=4
   - line_profiler
-  - matplotlib>=3.4
   - nb_conda_kernels
-  - nccl
-  - nodejs
-  - numba>=0.55
-  - numpy>=1.20
-  - plumbum>=1.7.0
-  - python-graphviz
-  - python>=3.9
-  - pytorch
-  - scipy
-  # Disabled
-  #- tensorflow-gpu
