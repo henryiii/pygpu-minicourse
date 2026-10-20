@@ -83,11 +83,15 @@ async def submit_and_watch(name):
 
     out.unlink(missing_ok=True)
 
-    await submit_file(name, writer)
-    await watch_file(out, writer)
-
-    out.unlink(missing_ok=True)
-    sbatch.unlink(missing_ok=True)
+    # A background task's exception is never shown, so put it in the output.
+    try:
+        await submit_file(name, writer)
+        await watch_file(out, writer)
+    except Exception as e:  # noqa: BLE001
+        writer.add(f"\n{type(e).__name__}: {e}\n")
+    finally:
+        out.unlink(missing_ok=True)
+        sbatch.unlink(missing_ok=True)
 
 
 def sbatch(line, cell):
