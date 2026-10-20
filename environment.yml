@@ -2,17 +2,19 @@ name: gpu-minicourse
 channels:
   - conda-forge
 dependencies:
-  # Python is held at 3.12 and CUDA at 12.9 because TensorFlow is the slowest
-  # of these to support a new version of either. Drop TensorFlow to go higher.
+  # Python is held at 3.12 because TensorFlow is the slowest to support a new
+  # release; it also holds PyTorch at 2.12. CUDA 13 solves, but the cluster
+  # driver must be new enough (>=580) before the pin moves.
+  # Drop TensorFlow to go higher.
   - python 3.12.*
   - cuda-version 12.9.*
   # GPU libraries. numba-cuda supplies numba.cuda; the CUDA target is no longer
   # part of numba itself.
   - cupy >=14
-  - numba >=0.61
-  - numba-cuda >=0.15
-  - pytorch-gpu >=2.9
-  - tensorflow-gpu >=2.19
+  - numba >=0.66
+  - numba-cuda >=0.30
+  - pytorch-gpu >=2.12
+  - tensorflow-gpu >=2.21
   # Scientific stack
   - iminuit
   - matplotlib-base >=3.9

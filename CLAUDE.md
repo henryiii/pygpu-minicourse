@@ -88,11 +88,12 @@ one. Update the notes when the install procedure changes.
 
 ## Environment constraints
 
-`environment.yml` pins Python 3.12 and `cuda-version` 12.9 because TensorFlow is
-the last of the four GPU libraries to support a new release of either — it is
-the binding constraint, and CuPy/PyTorch/numba-cuda would otherwise go to CUDA
-13. Dropping `tensorflow-gpu` (and `02b_nll_tensorflow.ipynb`) is what unblocks
-a Python or CUDA bump.
+`environment.yml` pins Python 3.12 because TensorFlow is the last of the four
+GPU libraries to support a new Python release (conda-forge builds stop at 3.12);
+its pins also hold PyTorch at 2.12. Every library now has CUDA 13 builds, so the
+`cuda-version` 12.9 pin is a cluster-driver choice: move it only once the
+Adroit driver is 580 or newer. Dropping `tensorflow-gpu` (and
+`02b_nll_tensorflow.ipynb`) is what unblocks a Python or PyTorch bump.
 
 `numba` no longer contains the CUDA target; `numba-cuda` supplies the
 `numba.cuda` namespace and must be installed alongside it.
