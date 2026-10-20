@@ -1,3 +1,5 @@
+target-version = "py314"
+
 [lint]
 extend-select = [
   "B",   # flake8-bugbear

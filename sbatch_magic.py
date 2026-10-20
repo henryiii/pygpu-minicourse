@@ -2,11 +2,11 @@ import asyncio
 from io import StringIO
 from pathlib import Path
 
-from IPython import display
+from IPython import display, get_ipython
 
 DONE_MARKER = "[SBATCH-DONE]"
 
-# ensure_future only keeps a weak reference, so a running job can be collected
+# The event loop only keeps a weak reference, so a running job can be collected
 # mid-flight unless we hold on to it here.
 _TASKS = set()
 
@@ -83,11 +83,15 @@ async def submit_and_watch(name):
 
     out.unlink(missing_ok=True)
 
-    await submit_file(name, writer)
-    await watch_file(out, writer)
-
-    out.unlink(missing_ok=True)
-    sbatch.unlink(missing_ok=True)
+    # A background task's exception is never shown, so put it in the output.
+    try:
+        await submit_file(name, writer)
+        await watch_file(out, writer)
+    except Exception as e:  # noqa: BLE001
+        writer.add(f"\n{type(e).__name__}: {e}\n")
+    finally:
+        out.unlink(missing_ok=True)
+        sbatch.unlink(missing_ok=True)
 
 
 def sbatch(line, cell):
@@ -95,11 +99,12 @@ def sbatch(line, cell):
     (name,) = line.split()  # Name required
     assert "." not in name, "Do not include extension!"
 
-    txt = cell.format(name=name, **globals()) + f'echo\necho "{DONE_MARKER}"\n'
+    txt = cell.format_map(get_ipython().user_ns | {"name": name})
+    txt += f'echo\necho "{DONE_MARKER}"\n'
 
     Path(f"{name}.sbatch").write_text(txt)
 
-    task = asyncio.ensure_future(submit_and_watch(name))
+    task = asyncio.create_task(submit_and_watch(name))
     _TASKS.add(task)
     task.add_done_callback(_TASKS.discard)
 
