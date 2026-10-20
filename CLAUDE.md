@@ -37,7 +37,7 @@ sequential:
 - `00_intro` — slides only (GPU concepts, CUDA/ROCm/SYCL terms).
 - `01a` / `01b` — Mandelbrot fractal in CuPy and in Numba CUDA.
 - `02a` / `02b` / `02c` — unbinned negative log likelihood in CuPy,
-  TensorFlow, and PyTorch. `02x_torch_autograd` is an aside on autograd.
+  JAX, and PyTorch. `02x_torch_autograd` is an aside on autograd.
 - `03_nll` — combined CuPy + Numba version of the NLL problem.
 - `04_ode` — an ODE solver that is _slower_ on the GPU; the counter-example.
 
@@ -88,12 +88,10 @@ one. Update the notes when the install procedure changes.
 
 ## Environment constraints
 
-`environment.yml` pins Python 3.12 because TensorFlow is the last of the four
-GPU libraries to support a new Python release (conda-forge builds stop at 3.12);
-its pins also hold PyTorch at 2.12. Every library now has CUDA 13 builds, so the
-`cuda-version` 12.9 pin is a cluster-driver choice: move it only once the
-Adroit driver is 580 or newer. Dropping `tensorflow-gpu` (and
-`02b_nll_tensorflow.ipynb`) is what unblocks a Python or PyTorch bump.
+`environment.yml` pins `cuda-version` 12.9 to match the Adroit driver; every
+library has CUDA 13 builds, so move the pin once the driver is 580 or newer.
+TensorFlow was dropped in 2026 because it held Python and PyTorch back; JAX
+(`jaxlib * *cuda*` from conda-forge) took its place in `02b`.
 
 `numba` no longer contains the CUDA target; `numba-cuda` supplies the
 `numba.cuda` namespace and must be installed alongside it.

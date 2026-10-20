@@ -69,14 +69,14 @@ the course kernel show up.
 
 ## Contents
 
-| Notebook                                                | Topic                                                 |
-| ------------------------------------------------------- | ----------------------------------------------------- |
-| `00_intro`                                              | GPU concepts, and the Python GPU library landscape    |
-| `01a_fractal_cupy` / `01b_fractal_numba`                | Mandelbrot fractal, the same problem in two libraries |
-| `02a_nll_cupy` / `02b_nll_tensorflow` / `02c_nll_torch` | Unbinned negative log likelihood, in three libraries  |
-| `02x_torch_autograd`                                    | A short look at PyTorch gradients                     |
-| `03_nll`                                                | The NLL problem again, CuPy and Numba together        |
-| `04_ode`                                                | An ODE solver that is _slower_ on the GPU             |
+| Notebook                                         | Topic                                                 |
+| ------------------------------------------------ | ----------------------------------------------------- |
+| `00_intro`                                       | GPU concepts, and the Python GPU library landscape    |
+| `01a_fractal_cupy` / `01b_fractal_numba`         | Mandelbrot fractal, the same problem in two libraries |
+| `02a_nll_cupy` / `02b_nll_jax` / `02c_nll_torch` | Unbinned negative log likelihood, in three libraries  |
+| `02x_torch_autograd`                             | A short look at PyTorch gradients                     |
+| `03_nll`                                         | The NLL problem again, CuPy and Numba together        |
+| `04_ode`                                         | An ODE solver that is _slower_ on the GPU             |
 
 Each one starts from a NumPy version on the CPU, so you can see what the GPU
 actually buys you.
